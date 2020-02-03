@@ -1,0 +1,14 @@
+.ToDo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.fullTask{
+    align-self: flex-start !important;
+    justify-self: flex-start !important;
+    display: inline;
+}
+
+
+
