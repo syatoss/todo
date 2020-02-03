@@ -5,12 +5,13 @@ import {useObserver} from 'mobx-react'
 import './AddNote.css'
 
 const AddNote:React.FC = ()=>{
-    const store = React.useContext(StoreContext);
+    const store:Record<string, any> = React.useContext(StoreContext);
     const [inputVal,setInputVal] = useState('');
     const input: React.RefObject<any> = React.useRef(null);
+
   
     const addNote = ():void=>{
-      const time = new Time;
+      const time:Time = new Time;
       input.current.inputRef.current.value = '';
       store.addNote({name:inputVal, list:[],creationDate:time,lastUpdate:time})
       setInputVal('');
@@ -20,12 +21,15 @@ const AddNote:React.FC = ()=>{
   
     return  useObserver(()=>(
      
-      <div>
+      <div> 
+        
         <Input 
+        sticky
+        size='big'
         action={{
           className:'btn1',  
           color:'blue',
-          size:'small',
+          size:'big',
           icon:{name:'add',className:'icon1',color:'white'},
           onClick:addNote
         }}
@@ -34,6 +38,7 @@ const AddNote:React.FC = ()=>{
         placeholder='Add Note'
         onChange={(e:React.ChangeEvent<HTMLInputElement>)=>{setInputVal(e.target.value)}}
         />
+        
       </div>
    
     ))

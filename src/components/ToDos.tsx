@@ -12,18 +12,19 @@ interface Props{
     key:string;
 }
 
+
 const ToDos:React.FC<Props> = ({todo,listIndex,noteIndex})=>{
-    const icon:any[] = ['check circle outline','circle outline'];
-    const button:any[] = ['green','grey'];
-    const underline:any[] = ['line-through','none'];
-    const store = React.useContext(StoreContext);
+
+    const icon:('check circle outline'|'circle outline')[] = ['check circle outline','circle outline'];
+    const button:('green'|'grey')[] = ['green','grey'];
+    const underline:('line-through'|'none')[] = ['line-through','none'];
+    const store:Record<string, any> = React.useContext(StoreContext);
     const [btnColor,setBtnColor] = useState(store.notes[noteIndex].list[listIndex].done?button[0]:button[1]);
     const [currentText,setCurrentText] = useState(todo.description)
-    const [textColor,setTextColor] = useState('grey');
     const [textStyle,setTextStyle] = useState(todo.done?underline[0]:underline[1])
     const [iconName,setIconName] = useState(todo.done?icon[0]:icon[1]);
-    const btnRef:any = React.useRef();
-    const textRef:any = React.useRef();
+    const btnRef:React.RefObject<any> = React.useRef();
+    const textRef:React.RefObject<any> = React.useRef();
     const [todoText,setTodoText] = useState('p');
 
 
@@ -54,9 +55,7 @@ const ToDos:React.FC<Props> = ({todo,listIndex,noteIndex})=>{
                 name= {iconName}
                 ref={btnRef} 
                 style={{color:btnColor}}
-                onClick={handleClick}
-                onMouseOver={()=>{setTextColor('black')}}
-                onMouseOut={()=>{setTextColor('grey')}}                
+                onClick={handleClick}             
                 >
                 </List.Icon>
                 <List.Content textAlign='left'>
@@ -90,7 +89,8 @@ const ToDos:React.FC<Props> = ({todo,listIndex,noteIndex})=>{
                         }}
                         style={{
                             textDecoration:textStyle,
-                            width:window.innerWidth*0.2
+                            width:store.cardWidth*0.8,
+                            resize:'none'
                         }}>
                             {todo.description}
                     </TextArea>

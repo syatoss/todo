@@ -2,7 +2,7 @@ import React, { useState ,ReactElement} from 'react'
 import  {useObserver } from 'mobx-react'
 import {Note,ToDo} from './GlobalVals'
 import {StoreContext,Time,MAX_SINGLE_WORD,currectString,dealWithLongString} from './GlobalVals'
-import { Grid, Segment,Divider,Button,Card,Input,Icon,Accordion,AccordionTitleProps,Header,List,ListContent } from 'semantic-ui-react'
+import {  Segment,Divider,Button,Card,Input,Icon,Accordion,AccordionTitleProps,Header,List,ListContent } from 'semantic-ui-react'
 import './SingleNote.css'
 import ToDos from './ToDos'
 
@@ -12,22 +12,21 @@ interface Props{
     key:string;
   }
 
-const SingleNote:React.FC<Props> = ({note,index,key})=>{
+const SingleNote:React.FC<Props> = ({note,index})=>{
     const {name,creationDate,lastUpdate} = note;//destructuring the note prop
-    const store = React.useContext(StoreContext);
+    const store:Record<string, any> = React.useContext(StoreContext);
     const [activeIndex,setActiveIndex] = useState(-1);
     const [hover,setHover] = useState(false);//does the user hovers over the delete button
     const [inputVal,setInptVal] = useState('');//the value in the input field
-    const btnRef:any = React.useRef();//a ref to the button that adds the other task
-    const inptRef:any = React.useRef();//a ref to the input that adds another task
-    const PREVIEW_LIMIT = 3;//maximum ninmber of task to see in preview screen
+    const btnRef:React.RefObject<any> = React.useRef();//a ref to the button that adds the other task
+    const inptRef:React.RefObject<any> = React.useRef();//a ref to the input that adds another task
     const DEFAULT_EMPTY_MESSAGE:string = 'Currnty no tasks';
 
 
     const colorTuggle=():void=>{
         setHover(!hover);
     }
-    const getColor=()=>{
+    const getColor=():'red'|'grey'=>{
         if(hover === true){
             return 'red';
         }else{
@@ -90,7 +89,7 @@ const SingleNote:React.FC<Props> = ({note,index,key})=>{
             <Card.Header size='small'>
         
              
-            <Header as='h6' color='grey' floated='left' textAlign='left'>
+            <Header color='grey' floated='left' textAlign='left' style={{fontSize:'0.7rem'}}>
                     Created At: {creationDate.fullDate} 
             </Header>
                 <Button 
@@ -152,7 +151,7 @@ const SingleNote:React.FC<Props> = ({note,index,key})=>{
                     
                 >
                     <Icon className='acordion' name='dropdown' />
-                    list:
+                    <span>My Tasks:</span>
                 </Accordion.Title>
                 <Accordion.Content className='acordion' active={activeIndex === 0}>
                 <List textAlign='left' floated='left'>
@@ -160,11 +159,6 @@ const SingleNote:React.FC<Props> = ({note,index,key})=>{
                 </List>
                 </Accordion.Content>
                 </Accordion>
-                {/* {note.list.map((todo:ToDo,i:number)=>{
-                    if(i < PREVIEW_LIMIT){
-                        return <ToDos todo={todo} listIndex={i} noteInex={index} key={`todo${i}`}/>
-                    }
-                })}   */}
                 <br/>
 
                 <Header as='h6' color='grey' floated='right' textAlign='right' className='lastUpdate'>

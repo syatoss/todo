@@ -7,9 +7,7 @@ import { Grid, Container,Segment,Button,Card } from 'semantic-ui-react'
 
 
 const Notes:React.FC = ()=>{
-    const store = React.useContext(StoreContext);
-    const [numOfColumns,setNumOfColumns] = useState<1|2|3>(window.innerWidth > 1300?3:window.innerWidth > 900?2:1)
-    // const []
+    const store:Record<string, any> = React.useContext(StoreContext);
 
     window.onresize = ():void=>{
         let width = window.innerWidth;
@@ -27,23 +25,18 @@ const Notes:React.FC = ()=>{
   
   
     return useObserver(()=>
-    (
-        
+    (  
         <div>
             <Container>
             <Grid columns={store.columns}>
             {store.notes.map((note:Note,i:number)=>{
                 return (<Grid.Column>
-                        
-                            <SingleNote note={note} index={i}  key={note.name + i.toString()}  />
-                        
+                            <SingleNote note={note} index={i}  key={note.name + i.toString()}  />  
                     </Grid.Column>)
-            
             })}
             </Grid>
             </Container>
         </div>
-        
     ));
     
    

@@ -8,16 +8,11 @@ import AddNote from './components/AddNote'
 
 
 const App:React.FC = () => {
-  const store = React.useContext(StoreContext);
-
-
-
  
   return useObserver(()=>(
     <StoreProvider>
     <div className="App">
       <br/>
-
           <AddNote/>
           <br/>
           <br/>
