@@ -17,5 +17,8 @@ An edit to  an empty task will not be saved, furthermore and empty task can not 
 
 Open https://syatoss.github.io/todo/ to view it in the browser.
 
+## Technologies used:
+Typescript, React, semantic-ui library and mobx state management.
+
 
 
