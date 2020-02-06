@@ -1,7 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Overall description
-An interface for a notes app, capable of creating up to 10 notes.
+An interface for a notes app, capable of creating up to 10 notes. 
 A note may have a title or not, notes with the same title are allowed.
 A note may be deleted via the X buuton.
 Each note has a creation date time stamp and a last update time stamp.
